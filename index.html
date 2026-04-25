@@ -48,6 +48,13 @@
         a:hover {
             text-decoration: underline;
         }
+        /* 新增一点清爽的动效，保留原有风格 */
+        .link-item a {
+            transition: color 0.2s ease;
+        }
+        .link-item a:hover {
+            color: #004499;
+        }
     </style>
 </head>
 <body>
@@ -73,6 +80,10 @@
     <div class="projects">
         <h2>我开发过的网站 & 游戏大全</h2>
 
+        <!-- 新增 “画板” 项目，严格遵循 tyy485.github.io/draw/ 规律，Title 标签不变 -->
+        <p class="link-item">
+            <a href="https://tyy485.github.io/draw/" target="_blank">画板 🎨</a>
+        </p>
         <p class="link-item">
             <a href="https://tyy485.github.io/games/" target="_blank">游戏大全</a>
         </p>
