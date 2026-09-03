@@ -1,94 +1,70 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh‑CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Not Found</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, sans‑serif;
-        }
-        body {
-            min-height: 100vh;
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .title-404 {
-            font-size: 140px;
-            font-weight: 700;
-            color: #111;
-        }
-        .desc-text {
-            font-size: 28px;
-            color: #222;
-            margin-top: 24px;
-            opacity: 0;
-            transition: opacity 1.2s ease;
-        }
-        .box-wrap {
-            margin-top: 48px;
-            width: 280px;
-            height: 56px;
-            overflow: hidden;
-        }
-        .black-box {
-            width: 100%;
-            height: 100%;
-            background-color: #171717;
-            border-radius: 10px;
-            transform: translateX(-320px);
-            transition: transform 0.7s cubic‑bezier(0.22,1,0.36,1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .box-text {
-            color: #fff;
-            font-size: 18px;
-            opacity: 0;
-            transition: opacity 0.9s ease;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial‑scale=1.0">
+<title>404 · 页面找不到了</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    background:#f4f5f7;
+    font-family:"Microsoft YaHei",PingFang SC,sans‑serif;
+    display:flex;
+    min-height:100vh;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+.box{
+    background:#fff;
+    padding:48px 36px;
+    border-radius:14px;
+    text-align:center;
+    border:1px solid #e8e8e8;
+    max-width:440px;
+    width:100%;
+}
+h1{
+    font-size:72px;
+    color:#1a73e8;
+    line-height:1;
+    margin-bottom:16px;
+}
+.title{
+    font-size:22px;
+    color:#1e232b;
+    margin-bottom:12px;
+}
+.desc{
+    font-size:15px;
+    color:#777;
+    margin-bottom:32px;
+    line-height:1.7;
+}
+.back-btn{
+    display:inline-block;
+    padding:11px 28px;
+    background:#1e232b;
+    color:#fff;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:15px;
+    transition:background .18s;
+}
+.back-btn:hover{
+    background:#39414d;
+}
+</style>
 </head>
 <body>
-    <div class="title-404">404</div>
-    <div class="desc-text" id="subText">这里什么也没找到</div>
-    <div class="box-wrap">
-        <div class="black-box" id="box">
-            <span class="box-text" id="btnText">回到主页</span>
-        </div>
+<div class="box">
+    <h1>404</h1>
+    <div class="title">页面走丢啦</div>
+    <div class="desc">
+        你访问的地址不存在，可能链接写错、页面已经移动或者被删除。
     </div>
-
-    <script>
-        const subText = document.getElementById('subText');
-        const box = document.getElementById('box');
-        const btnText = document.getElementById('btnText');
-
-        // 第一步：淡入说明文字
-        setTimeout(() => {
-            subText.style.opacity = "1";
-        }, 350);
-
-        // 第二步：黑色方框从屏幕左侧外面滑入
-        setTimeout(() => {
-            box.style.transform = "translateX(0)";
-        }, 1600);
-
-        // 第三步：方框到位之后，内部文字慢慢显示
-        setTimeout(() => {
-            btnText.style.opacity = "1";
-        }, 2300);
-
-        // 点击跳转
-        box.addEventListener("click", () => {
-            location.href = "/";
-        })
-    </script>
+    <a class="back-btn" href="./index.html">返回主页</a>
+</div>
 </body>
 </html>
+
