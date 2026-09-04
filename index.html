@@ -6,7 +6,7 @@
     <title>tyy485 的个人博客</title>
     <style>
         :root {
-            --font-scale: 1; /* 字号缩放系数，默认1 */
+            --font-scale: 1;
         }
         * {
             margin: 0;
@@ -44,7 +44,6 @@
             transform: scale(1.15) rotate(5deg);
             color: #60a5fa;
         }
-        /* 字号设置控件 */
         .font-setting-wrap {
             display: flex;
             align-items: center;
@@ -344,7 +343,6 @@
         .github-btn:hover {
             background: #374151;
         }
-        /* 更多链接板块升级样式 */
         .link-list-card {
             background:#fff;
             border-radius:16px;
@@ -358,11 +356,12 @@
             color:#1a202c;
             margin-bottom:16px;
         }
-        .link-list-card .intro-text {
-            color:#4b5563;
-            margin-bottom:22px;
-            line-height:1.75;
-            font-size: calc(16px * var(--font-scale));
+        .link-category {
+            margin: 24px 0 12px;
+            font-weight: 600;
+            color:#2563eb;
+            padding-left:12px;
+            border-left:4px solid #2563eb;
         }
         .link-item {
             display:flex;
@@ -384,10 +383,6 @@
             font-weight:550;
             font-size: calc(16px * var(--font-scale));
         }
-        .link-item .link-desc {
-            color:#6b7280;
-            font-size: calc(15px * var(--font-scale));
-        }
     </style>
 </head>
 <body>
@@ -397,7 +392,7 @@
             <span class="font-label">字号：</span>
             <select id="fontSizeSelect">
                 <option value="0.8">小</option>
-                <option value="1">默认</option>
+                <option value="1" selected>默认</option>
                 <option value="1.2">大</option>
             </select>
         </div>
@@ -412,7 +407,6 @@
     </div>
 
     <div class="main-wrap">
-        <!-- ========== 主页介绍 ========== -->
         <div id="intro-panel">
             <h1>tyy485 的个人博客</h1>
             <div class="post-content">
@@ -465,7 +459,6 @@
             </div>
         </div>
 
-        <!-- ========== 我的网页 ========== -->
         <div id="web-panel" class="hidden">
             <h2>我的网页作品</h2>
             <p class="page-subtitle">大部分作品支持手机触屏游玩，部分老项目仅适配电脑键盘，手机上体验会受限</p>
@@ -485,7 +478,6 @@
                 </div>
             </div>
 
-            <!-- 沙盒 / 创造类 -->
             <div class="category-block">
                 <div class="category-title">沙盒 & 创造</div>
                 <div class="card-grid">
@@ -508,7 +500,6 @@
                 </div>
             </div>
 
-            <!-- 动作 / 躲避类 -->
             <div class="category-block">
                 <div class="category-title">动作 & 躲避</div>
                 <div class="card-grid">
@@ -547,7 +538,6 @@
                 </div>
             </div>
 
-            <!-- 休闲 / 消除类 -->
             <div class="category-block">
                 <div class="category-title">休闲 & 消除</div>
                 <div class="card-grid">
@@ -594,7 +584,6 @@
                 </div>
             </div>
 
-            <!-- 益智 / 棋类 -->
             <div class="category-block">
                 <div class="category-title">益智 & 棋类</div>
                 <div class="card-grid">
@@ -625,7 +614,6 @@
                 </div>
             </div>
 
-            <!-- 合集 / 实验 -->
             <div class="category-block">
                 <div class="category-title">合集 & 实验</div>
                 <div class="card-grid">
@@ -654,12 +642,10 @@
             </div>
         </div>
 
-        <!-- ========== 其他项目 ========== -->
         <div id="other-panel" class="hidden">
             <h2>其他开源项目</h2>
             <p class="page-subtitle">除了网页之外，我也在开发命令行工具与自动化脚本</p>
 
-            <!-- makeotoini 大卡片 -->
             <div class="repo-card">
                 <div class="repo-header">
                     <div class="repo-name">makeotoini</div>
@@ -692,7 +678,6 @@
                 </a>
             </div>
 
-            <!-- 开发中占位 -->
             <div class="placeholder-card">
                 <div class="ph-icon">🚧</div>
                 <div class="ph-text">更多项目正在开发中，敬请期待</div>
@@ -704,58 +689,43 @@
             </div>
         </div>
 
-        <!-- ========== 更多链接 ========== -->
         <div id="links-panel" class="hidden">
             <h2>更多链接</h2>
             <p class="page-subtitle">一些好玩的外部游戏网站合集</p>
             <div class="link-list-card">
-                <h3>游戏网站合集</h3>
-                <div class="intro-text">
-                    我其实还知道一些别人的也很好玩的游戏网站，已经列出来了，就在下面哦～
-                </div>
+                <h3>网站合集</h3>
+                <div class="link-category">网页游戏平台</div>
                 <div class="link-item">
                     <a href="https://mcjs.link" target="_blank">mcjs.link</a>
-                    <span class="link-desc">我的世界网页版</span>
                 </div>
                 <div class="link-item">
-                    <a href="https://crazygame.com" target="_blank">crazygame.com</a>
-                    <span class="link-desc">Crazygame游戏站</span>
+                    <a href="https://crazygame.com" target="_blank">Crazygame</a>
                 </div>
                 <div class="link-item">
-                    <a href="https://game.yandex.com" target="_blank">game.yandex.com</a>
-                    <span class="link-desc">俄罗斯Yandex游戏平台</span>
+                    <a href="https://game.yandex.com" target="_blank">Yandex Games</a>
                 </div>
                 <div class="link-item">
-                    <a href="https://poki.com" target="_blank">poki.com</a>
-                    <span class="link-desc">Poki在线游戏平台</span>
+                    <a href="https://poki.com" target="_blank">Poki</a>
                 </div>
                 <div class="link-item">
-                    <a href="https://4399.com" target="_blank">4399.com</a>
-                    <span class="link-desc">4399小游戏官网</span>
+                    <a href="https://4399.com" target="_blank">4399</a>
                 </div>
+                <div class="link-category">独立游戏社区</div>
                 <div class="link-item">
                     <a href="https://itch.io" target="_blank">itch.io</a>
-                    <span class="link-desc">独立游戏发布平台</span>
                 </div>
                 <div class="link-item">
-                    <a href="https://kongregate.com" target="_blank">kongregate.com</a>
-                    <span class="link-desc">海外Flash小游戏站点</span>
+                    <a href="https://kongregate.com" target="_blank">Kongregate</a>
                 </div>
                 <div class="link-item">
-                    <a href="https://armorgames.com" target="_blank">armorgames.com</a>
-                    <span class="link-desc">老牌网页游戏网站</span>
+                    <a href="https://armorgames.com" target="_blank">Armor Games</a>
                 </div>
                 <div class="link-item">
-                    <a href="https://newgrounds.com" target="_blank">newgrounds.com</a>
-                    <span class="link-desc">国外游戏创作社区</span>
-                </div>
-                <div class="bottom-note">
-                    这就是我知道的全部网站，我也在冲浪，知道更多网站，这些网站不是我的，不受我管控，注意安全！
+                    <a href="https://newgrounds.com" target="_blank">Newgrounds</a>
                 </div>
             </div>
         </div>
 
-        <!-- 页脚：GitHub按钮 -->
         <div class="footer-area">
             <a class="github-btn" href="https://github.com/tyy485" target="_blank">前往我的 GitHub</a>
         </div>
@@ -775,19 +745,12 @@
 
         let currentTab = "intro";
 
-        // 字号控制
+        // 字号不持久化，每次打开默认1
         function setFontScale(scale){
             document.documentElement.style.setProperty("--font-scale", scale);
-            localStorage.setItem("fontScale", scale);
         }
-        // 页面加载读取保存的字号
-        window.addEventListener("DOMContentLoaded",()=>{
-            const saved = localStorage.getItem("fontScale");
-            if(saved){
-                fontSizeSelect.value = saved;
-                setFontScale(saved);
-            }
-        })
+        fontSizeSelect.value = "1";
+        setFontScale("1");
         fontSizeSelect.addEventListener("change",function(){
             setFontScale(this.value);
         })
@@ -823,6 +786,18 @@
             updateActiveMenu();
             closeMenu();
             window.scrollTo({ top: 0, behavior: "smooth" });
+            history.replaceState(null, "", "#tab=" + tab);
+        }
+        function loadFromHash(){
+            const hash = window.location.hash;
+            const match = hash.match(/tab=(\w+)/);
+            if(match){
+                const tab = match[1];
+                if(["intro","web","other","links"].includes(tab)){
+                    currentTab = tab;
+                }
+            }
+            switchTab(currentTab);
         }
 
         menuBtn.addEventListener("click", openMenu);
@@ -832,8 +807,11 @@
                 switchTab(item.dataset.target);
             });
         });
+        window.addEventListener("popstate", loadFromHash);
+        window.addEventListener("DOMContentLoaded", loadFromHash);
         updateActiveMenu();
     </script>
 </body>
 </html>
+
 
