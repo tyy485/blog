@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tyy485 的个人博客</title>
     <style>
+        :root {
+            --font-scale: 1; /* 字号缩放系数，默认1 */
+        }
         * {
             margin: 0;
             padding: 0;
@@ -12,50 +15,71 @@
         }
         body {
             font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-            background: #f4f5f7;
-            color: #333;
-            font-size: 16px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: #2d3748;
+            font-size: calc(16px * var(--font-scale));
+            min-height: 100vh;
         }
-        /* 顶部栏 */
         .top-bar {
-            background-color: #1e232b;
-            height: 56px;
+            background: #1a202c;
+            height: 60px;
             position: sticky;
             top: 0;
             z-index: 100;
             display: flex;
             align-items: center;
-            padding: 0 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            padding: 0 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            justify-content: space-between;
         }
         .hamburger {
-            color: #fff;
-            font-size: 26px;
+            color: #ffffff;
+            font-size: 28px;
             cursor: pointer;
             user-select: none;
             line-height: 1;
+            transition: all 0.25s ease;
         }
-        /* 遮罩 */
+        .hamburger:hover {
+            transform: scale(1.15) rotate(5deg);
+            color: #60a5fa;
+        }
+        /* 字号设置控件 */
+        .font-setting-wrap {
+            display: flex;
+            align-items: center;
+            gap:8px;
+        }
+        .font-label{
+            color:#fff;
+            font-size:14px;
+        }
+        #fontSizeSelect{
+            padding:4px 8px;
+            border-radius:6px;
+            border:none;
+            font-size:14px;
+        }
         .overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.5);
             z-index: 101;
             display: none;
+            backdrop-filter: blur(3px);
         }
-        /* 左侧滑出菜单 */
         .side-menu {
             position: fixed;
             top: 0;
             left: 0;
-            width: 260px;
+            width: 280px;
             height: 100vh;
             background: #ffffff;
             z-index: 102;
             transform: translateX(-100%);
-            transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
-            padding-top: 70px;
-            box-shadow: 2px 0 12px rgba(0,0,0,0.1);
+            transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+            padding-top: 75px;
+            box-shadow: 6px 0 24px rgba(0,0,0,0.18);
         }
         .side-menu.open {
             transform: translateX(0);
@@ -63,269 +87,320 @@
         .menu-item {
             display: block;
             width: 100%;
-            padding: 15px 24px;
-            font-size: 16px;
+            padding: 16px 26px;
+            font-size: 17px;
             cursor: pointer;
             border: none;
             background: none;
             text-align: left;
-            transition: background 0.15s;
+            transition: all 0.2s ease;
         }
         .menu-item.active {
-            background: #e8f0fe;
-            color: #1a73e8;
+            background: #eff6ff;
+            color: #2563eb;
             font-weight: 600;
-            border-right: 3px solid #1a73e8;
+            border-right: 4px solid #2563eb;
         }
         .menu-item:not(.active) {
-            color: #202124;
+            color: #374151;
         }
         .menu-item:hover:not(.active) {
-            background: #f5f5f5;
+            background: #f3f4f6;
+            padding-left: 32px;
         }
-        /* 主内容区域 */
         .main-wrap {
-            max-width: 820px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 36px 20px 60px;
+            padding: 40px 20px 90px;
         }
         h1 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            color: #1e232b;
+            font-size: calc(36px * var(--font-scale));
+            margin-bottom: 24px;
+            color: #1a202c;
+            text-align: center;
         }
         h2 {
-            font-size: 22px;
-            color: #1e232b;
-            margin-bottom: 6px;
+            font-size: calc(26px * var(--font-scale));
+            color: #1a202c;
+            margin-bottom: 10px;
         }
         .page-subtitle {
-            color: #888;
-            font-size: 14px;
-            margin-bottom: 28px;
+            color: #6b7280;
+            font-size: calc(16px * var(--font-scale));
+            margin-bottom: 32px;
+            text-align: center;
         }
         .post-content {
-            margin-bottom: 40px;
-            color: #555;
-            line-height: 1.8;
+            margin-bottom: 48px;
+            color: #4b5563;
+            line-height: 1.9;
+            background:#fff;
+            padding:32px;
+            border-radius:16px;
+            box-shadow:0 2px 12px rgba(0,0,0,0.06);
         }
         .post-content p {
-            margin-bottom: 14px;
+            margin-bottom: 18px;
+            font-size: calc(16px * var(--font-scale));
         }
-        /* 分类区块 */
         .category-block {
-            margin-bottom: 36px;
+            margin-bottom: 44px;
         }
         .category-title {
-            font-size: 16px;
+            font-size: calc(20px * var(--font-scale));
             font-weight: 600;
-            color: #1a73e8;
-            margin-bottom: 14px;
-            padding-left: 10px;
-            border-left: 3px solid #1a73e8;
+            color: #2563eb;
+            margin-bottom: 18px;
+            padding-left: 14px;
+            border-left: 5px solid #2563eb;
         }
-        /* 项目卡片网格 */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-            gap: 14px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
         }
         .project-card {
-            background: #fff;
-            border-radius: 10px;
-            padding: 18px 16px;
-            border: 1px solid #e8e8e8;
-            transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 22px 20px;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
             text-decoration: none;
             display: block;
         }
         .project-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-            border-color: #1a73e8;
-            text-decoration: none;
+            transform: translateY(-6px);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+            border-color: #2563eb;
         }
         .project-card .card-title {
-            font-size: 16px;
+            font-size: calc(18px * var(--font-scale));
             font-weight: 600;
-            color: #1e232b;
-            margin-bottom: 6px;
+            color: #1a202c;
+            margin-bottom: 10px;
         }
         .project-card .card-desc {
-            font-size: 13px;
-            color: #777;
-            line-height: 1.5;
-            margin-bottom: 10px;
+            font-size: calc(15px * var(--font-scale));
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 14px;
         }
         .project-card .card-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
         }
         .tag {
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 4px;
-            background: #f0f4ff;
-            color: #1a73e8;
+            font-size: calc(13px * var(--font-scale));
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: #eff6ff;
+            color: #2563eb;
         }
         .tag.tool {
-            background: #fff3e0;
-            color: #e65100;
+            background: #fff7ed;
+            color: #f97316;
         }
         .tag.classic {
-            background: #f3e5f5;
-            color: #7b1fa2;
+            background: #f5f3ff;
+            color: #8b5cf6;
         }
         .tag.demo {
-            background: #e8f5e9;
-            color: #2e7d32;
+            background: #f0fdf4;
+            color: #10b981;
         }
-        /* 统计条 */
         .stats-bar {
             display: flex;
-            gap: 24px;
-            background: #fff;
-            border-radius: 10px;
-            padding: 18px 24px;
-            margin-bottom: 32px;
-            border: 1px solid #e8e8e8;
+            gap: 32px;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 26px 30px;
+            margin-bottom: 40px;
+            border: 1px solid #e5e7eb;
+            justify-content:center;
         }
         .stat-item .stat-num {
-            font-size: 24px;
+            font-size: calc(28px * var(--font-scale));
             font-weight: 700;
-            color: #1a73e8;
+            color: #2563eb;
         }
         .stat-item .stat-label {
-            font-size: 13px;
-            color: #888;
-            margin-top: 2px;
+            font-size: calc(15px * var(--font-scale));
+            color: #6b7280;
+            margin-top: 4px;
         }
-        /* 其他项目 - 大卡片 */
         .repo-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 28px;
-            border: 1px solid #e8e8e8;
-            margin-bottom: 20px;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 34px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 26px;
+            box-shadow:0 2px 12px rgba(0,0,0,0.06);
         }
         .repo-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 14px;
+            margin-bottom: 18px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 14px;
         }
         .repo-name {
-            font-size: 20px;
+            font-size: calc(24px * var(--font-scale));
             font-weight: 700;
-            color: #1e232b;
+            color: #1a202c;
         }
         .repo-badge {
-            font-size: 12px;
-            padding: 3px 10px;
-            border-radius: 20px;
-            background: #e8f5e9;
-            color: #2e7d32;
+            font-size: calc(14px * var(--font-scale));
+            padding: 5px 12px;
+            border-radius: 24px;
+            background: #f0fdf4;
+            color: #10b981;
             font-weight: 600;
         }
         .repo-desc {
-            color: #555;
-            line-height: 1.7;
-            margin-bottom: 16px;
-            font-size: 15px;
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: calc(17px * var(--font-scale));
         }
         .repo-features {
-            margin-bottom: 18px;
+            margin-bottom: 22px;
         }
         .repo-features h4 {
-            font-size: 14px;
-            color: #1e232b;
-            margin-bottom: 8px;
+            font-size: calc(16px * var(--font-scale));
+            color: #1a202c;
+            margin-bottom: 12px;
         }
         .repo-features ul {
-            padding-left: 20px;
-            color: #666;
-            font-size: 14px;
-            line-height: 1.8;
+            padding-left: 24px;
+            color: #4b5563;
+            font-size: calc(16px * var(--font-scale));
+            line-height: 1.85;
         }
         .repo-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 18px;
+            gap: 10px;
+            margin-bottom: 22px;
         }
         .repo-link-btn {
             display: inline-block;
-            padding: 9px 22px;
-            background: #1e232b;
+            padding: 11px 26px;
+            background: #1a202c;
             color: #fff;
-            border-radius: 8px;
+            border-radius: 11px;
             text-decoration: none;
-            font-size: 14px;
+            font-size: calc(16px * var(--font-scale));
             font-weight: 500;
-            transition: background 0.15s;
+            transition: background 0.2s;
         }
         .repo-link-btn:hover {
-            background: #39414d;
-            text-decoration: none;
+            background: #374151;
         }
-        /* 开发中占位卡片 */
         .placeholder-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 32px 28px;
-            border: 2px dashed #d0d0d0;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 40px 32px;
+            border: 2px dashed #d1d5db;
             text-align: center;
-            color: #999;
+            color: #9ca3af;
         }
         .placeholder-card .ph-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
+            font-size: calc(40px * var(--font-scale));
+            margin-bottom: 14px;
         }
         .placeholder-card .ph-text {
-            font-size: 15px;
+            font-size: calc(17px * var(--font-scale));
         }
-        /* 底部备注 */
         .bottom-note {
-            margin-top: 40px;
-            padding-top: 18px;
-            border-top: 1px solid #e0e0e0;
-            color: #999;
-            font-size: 14px;
-            line-height: 1.6;
+            margin-top: 48px;
+            padding-top: 22px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: calc(15px * var(--font-scale));
+            line-height: 1.7;
         }
         .hidden {
             display: none;
         }
-        /* 页脚区域 */
         .footer-area {
-            margin-top: 50px;
-            padding-top: 24px;
-            border-top: 1px solid #ddd;
+            margin-top: 60px;
+            padding-top: 28px;
+            border-top: 1px solid #d1d5db;
             text-align: center;
         }
         .github-btn {
             display: inline-block;
-            padding: 10px 24px;
-            background: #1e232b;
+            padding: 12px 28px;
+            background: #1a202c;
             color: white;
-            border-radius: 8px;
+            border-radius: 11px;
             text-decoration: none;
-            font-size: 14px;
+            font-size: calc(16px * var(--font-scale));
             font-weight: 500;
-            transition: background 0.15s;
+            transition: background 0.2s;
         }
         .github-btn:hover {
-            background: #39414d;
-            text-decoration: none;
+            background: #374151;
+        }
+        /* 更多链接板块升级样式 */
+        .link-list-card {
+            background:#fff;
+            border-radius:16px;
+            padding:32px;
+            border:1px solid #e5e7eb;
+            margin-bottom:26px;
+            box-shadow:0 2px 12px rgba(0,0,0,0.06);
+        }
+        .link-list-card h3 {
+            font-size: calc(22px * var(--font-scale));
+            color:#1a202c;
+            margin-bottom:16px;
+        }
+        .link-list-card .intro-text {
+            color:#4b5563;
+            margin-bottom:22px;
+            line-height:1.75;
+            font-size: calc(16px * var(--font-scale));
+        }
+        .link-item {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:14px 16px;
+            border-radius:10px;
+            margin-bottom:10px;
+            background:#f9fafb;
+            transition:background 0.25s, transform 0.2s;
+        }
+        .link-item:hover {
+            background:#eff6ff;
+            transform:translateX(4px);
+        }
+        .link-item a {
+            color:#2563eb;
+            text-decoration:none;
+            font-weight:550;
+            font-size: calc(16px * var(--font-scale));
+        }
+        .link-item .link-desc {
+            color:#6b7280;
+            font-size: calc(15px * var(--font-scale));
         }
     </style>
 </head>
 <body>
     <div class="top-bar">
         <div class="hamburger" id="menuBtn">☰</div>
+        <div class="font-setting-wrap">
+            <span class="font-label">字号：</span>
+            <select id="fontSizeSelect">
+                <option value="0.8">小</option>
+                <option value="1">默认</option>
+                <option value="1.2">大</option>
+            </select>
+        </div>
     </div>
 
     <div class="overlay" id="overlay"></div>
@@ -333,6 +408,7 @@
         <button class="menu-item" data-target="intro">主页介绍</button>
         <button class="menu-item" data-target="web">我的网页</button>
         <button class="menu-item" data-target="other">其他项目</button>
+        <button class="menu-item" data-target="links">更多链接</button>
     </div>
 
     <div class="main-wrap">
@@ -348,7 +424,9 @@
                     慢慢之后，我不再只满足于做游戏，开始往别的方向探索：Python脚本、音频处理、自动化工具、开源项目。
                 </p>
                 <p>
-                    在开发的路上踩过非常多坑。有时候一段代码调试整整一个晚上都找不到问题，有时候好不容易写完的功能，换一台设备直接就出现兼容bug。
+                    在开发的路上踩过非常多坑。有时候一段代码调试整整一个晚上都找不到问题，有时候好不容易写完的功能，换一台设备直接就会出现兼容bug。
+                    有时候写出来的游戏在电脑上运行一切正常，放到手机上就会出现点击失灵、画面错位、按键失效的各种奇怪问题。
+                    浏览器环境千差万别，不同手机的屏幕尺寸、触摸事件行为都不一样，想要做到全设备兼容，需要反复测试大量机型。
                     但恰恰是这些不断试错的过程，才真正学到东西。我越来越喜欢写能够解决真实痛点的工具，而不只是用来娱乐的Demo。
                     makeotoini 就是这样诞生的项目，源于我自己在做UTAU声库的时候，反复手动编辑oto.ini带来的枯燥体验。
                 </p>
@@ -356,13 +434,33 @@
                     我建立这个网站，不打算写长篇大论的技术笔记，暂时更像一个自己作品的自留地。
                     我会把自己完成的项目集中放在这里，方便自己回看，也方便感兴趣的人直接体验。
                     我不会保证固定更新频率，有空的时候就写点新东西，或者回头维护旧项目。
+                    有些早期作品是学习阶段的练手产物，代码写得比较粗糙，功能也不算完善，我依旧保留在这里。
+                    这些不完美的作品记录了我一步步成长的轨迹，也代表了当时的思考与尝试。
+                </p>
+                <p>
+                    做网页小游戏，最有意思的地方在于不需要安装任何软件。只要有浏览器，不管是电脑还是手机，点开链接就可以直接体验。
+                    但也会遇到不少现实的限制。有些游戏设计之初就只针对电脑键盘操作，没有做触屏适配，在手机上游玩体验会大打折扣。
+                    还有部分项目存在性能问题，在配置较低的设备上会出现掉帧、卡顿的现象。
+                    我会持续优化一部分老项目，修复bug、改进交互，但并不会全部重写，保留历史版本也是一种纪念。
+                </p>
+                <p>
+                    除了网页前端，我也会接触不少别的技术。比如Python脚本、音频处理、UTAU声库制作相关工具。
+                    我很喜欢开源的氛围，把自己写出来的工具公开出来，让其他人也可以使用、修改，甚至在此基础上二次开发。
+                    当然开源并不代表没有规则，代码会使用合适的开源协议，明确版权归属，也允许他人在遵守协议的前提下自由使用。
                 </p>
                 <p>
                     如果你想查看我已经完成的作品，可以点开左上角菜单浏览。
                     所有开源项目的完整源代码，都可以在我的 GitHub 主页找到。
+                    如果你在游玩游戏、使用工具的时候遇到bug，或者有想法建议，欢迎去GitHub提交Issue反馈。
+                    我会尽量抽空查看，但是不一定可以及时修复，毕竟开发只是课余的爱好。
+                </p>
+                <p>
+                    编程是一场漫长的摸索，不用急于求成，一步一步往前走就足够了。
+                    不必一开始就追求做出多么强大完美的项目，从很小的Demo开始，一点点迭代，慢慢就会收获很多。
+                    遇到报错、遇到bug不要灰心，每一次排查问题，都是一次提升自己的机会。
                 </p>
                 <div class="bottom-note">
-                    编程是一场漫长的摸索，不用急于求成，一步一步往前走就足够了。
+                    本站所有项目均为个人爱好开发，仅供学习娱乐使用。
                 </div>
             </div>
         </div>
@@ -370,15 +468,15 @@
         <!-- ========== 我的网页 ========== -->
         <div id="web-panel" class="hidden">
             <h2>我的网页作品</h2>
-            <p class="page-subtitle">全部使用原生前端开发，打开浏览器即可游玩，支持手机触屏</p>
+            <p class="page-subtitle">大部分作品支持手机触屏游玩，部分老项目仅适配电脑键盘，手机上体验会受限</p>
 
             <div class="stats-bar">
                 <div class="stat-item">
-                    <div class="stat-num">15</div>
+                    <div class="stat-num">16</div>
                     <div class="stat-label">网页项目总数</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-num">12</div>
+                    <div class="stat-num">13</div>
                     <div class="stat-label">休闲小游戏</div>
                 </div>
                 <div class="stat-item">
@@ -463,7 +561,7 @@
                     </a>
                     <a class="project-card" href="https://tyy485.github.io/tanchishe/" target="_blank">
                         <div class="card-title">贪吃蛇</div>
-                        <div class="card-desc">无尽吃苹果，一直吃吃吃</div>
+                        <div class="card-desc">无尽吃苹果，一直吃吃吃，本项目仅支持电脑键盘操作</div>
                         <div class="card-tags">
                             <span class="tag classic">经典</span>
                             <span class="tag">街机</span>
@@ -483,6 +581,14 @@
                         <div class="card-tags">
                             <span class="tag classic">经典</span>
                             <span class="tag">街机</span>
+                        </div>
+                    </a>
+                    <a class="project-card" href="https://tyy485.github.io/elsfk/" target="_blank">
+                        <div class="card-title">俄罗斯方块</div>
+                        <div class="card-desc">经典方块消除游戏，堆叠方块消除行，挑战高分记录</div>
+                        <div class="card-tags">
+                            <span class="tag classic">经典</span>
+                            <span class="tag">消除</span>
                         </div>
                     </a>
                 </div>
@@ -543,7 +649,7 @@
             </div>
 
             <div class="bottom-note">
-                全部网页游戏原生适配移动端触屏，不需要额外安装，打开浏览器就可以直接游玩。
+                大部分网页游戏原生适配移动端触屏，部分早期作品仅支持电脑键盘操作。
                 部分早期作品代码比较稚嫩，留在这里也是记录自己的成长轨迹。
             </div>
         </div>
@@ -561,13 +667,13 @@
                 </div>
                 <div class="repo-desc">
                     一个用 Python 编写的 UTAU 声库 oto.ini 自动生成工具。
-                    在制作 VCV 录音表声库时，手动为每一个音素配置 oto 参数是一件极其枯燥且容易出错的工作。
-                    makeotoini 的目标就是把这部分重复劳动自动化，让声库制作者把精力放在更重要的调音与品质把控上。
+                    在制作UTAU声库时，手动为每一个音素配置 oto 参数是一件极其枯燥且容易出错的工作。
+                    makeotoini 的目标就是把这部分重复劳动自动化，支持各种录音表，让声库制作者把精力放在更重要的调音与品质把控上。
                 </div>
                 <div class="repo-features">
                     <h4>核心功能</h4>
                     <ul>
-                        <li>支持 VCV 录音表的 oto.ini 批量自动生成</li>
+                        <li>支持各种录音表的 oto.ini 批量自动生成</li>
                         <li>内置日式中文发音特色的音素配置逻辑</li>
                         <li>可自定义参数模板，适配不同风格的声库</li>
                         <li>自动处理临时文件与中间产物，保持目录干净</li>
@@ -598,6 +704,57 @@
             </div>
         </div>
 
+        <!-- ========== 更多链接 ========== -->
+        <div id="links-panel" class="hidden">
+            <h2>更多链接</h2>
+            <p class="page-subtitle">一些好玩的外部游戏网站合集</p>
+            <div class="link-list-card">
+                <h3>游戏网站合集</h3>
+                <div class="intro-text">
+                    我其实还知道一些别人的也很好玩的游戏网站，已经列出来了，就在下面哦～
+                </div>
+                <div class="link-item">
+                    <a href="https://mcjs.link" target="_blank">mcjs.link</a>
+                    <span class="link-desc">我的世界网页版</span>
+                </div>
+                <div class="link-item">
+                    <a href="https://crazygame.com" target="_blank">crazygame.com</a>
+                    <span class="link-desc">Crazygame游戏站</span>
+                </div>
+                <div class="link-item">
+                    <a href="https://game.yandex.com" target="_blank">game.yandex.com</a>
+                    <span class="link-desc">俄罗斯Yandex游戏平台</span>
+                </div>
+                <div class="link-item">
+                    <a href="https://poki.com" target="_blank">poki.com</a>
+                    <span class="link-desc">Poki在线游戏平台</span>
+                </div>
+                <div class="link-item">
+                    <a href="https://4399.com" target="_blank">4399.com</a>
+                    <span class="link-desc">4399小游戏官网</span>
+                </div>
+                <div class="link-item">
+                    <a href="https://itch.io" target="_blank">itch.io</a>
+                    <span class="link-desc">独立游戏发布平台</span>
+                </div>
+                <div class="link-item">
+                    <a href="https://kongregate.com" target="_blank">kongregate.com</a>
+                    <span class="link-desc">海外Flash小游戏站点</span>
+                </div>
+                <div class="link-item">
+                    <a href="https://armorgames.com" target="_blank">armorgames.com</a>
+                    <span class="link-desc">老牌网页游戏网站</span>
+                </div>
+                <div class="link-item">
+                    <a href="https://newgrounds.com" target="_blank">newgrounds.com</a>
+                    <span class="link-desc">国外游戏创作社区</span>
+                </div>
+                <div class="bottom-note">
+                    这就是我知道的全部网站，我也在冲浪，知道更多网站，这些网站不是我的，不受我管控，注意安全！
+                </div>
+            </div>
+        </div>
+
         <!-- 页脚：GitHub按钮 -->
         <div class="footer-area">
             <a class="github-btn" href="https://github.com/tyy485" target="_blank">前往我的 GitHub</a>
@@ -609,12 +766,31 @@
         const overlay = document.getElementById("overlay");
         const sideMenu = document.getElementById("sideMenu");
         const menuItems = document.querySelectorAll(".menu-item");
+        const fontSizeSelect = document.getElementById("fontSizeSelect");
 
         const introPanel = document.getElementById("intro-panel");
         const webPanel = document.getElementById("web-panel");
         const otherPanel = document.getElementById("other-panel");
+        const linksPanel = document.getElementById("links-panel");
 
         let currentTab = "intro";
+
+        // 字号控制
+        function setFontScale(scale){
+            document.documentElement.style.setProperty("--font-scale", scale);
+            localStorage.setItem("fontScale", scale);
+        }
+        // 页面加载读取保存的字号
+        window.addEventListener("DOMContentLoaded",()=>{
+            const saved = localStorage.getItem("fontScale");
+            if(saved){
+                fontSizeSelect.value = saved;
+                setFontScale(saved);
+            }
+        })
+        fontSizeSelect.addEventListener("change",function(){
+            setFontScale(this.value);
+        })
 
         function updateActiveMenu() {
             menuItems.forEach(item => {
@@ -639,9 +815,11 @@
             introPanel.classList.add("hidden");
             webPanel.classList.add("hidden");
             otherPanel.classList.add("hidden");
+            linksPanel.classList.add("hidden");
             if (tab === "intro") introPanel.classList.remove("hidden");
             if (tab === "web") webPanel.classList.remove("hidden");
             if (tab === "other") otherPanel.classList.remove("hidden");
+            if (tab === "links") linksPanel.classList.remove("hidden");
             updateActiveMenu();
             closeMenu();
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -658,3 +836,4 @@
     </script>
 </body>
 </html>
+
